@@ -1,27 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Categories;
-use App\User;
-use Auth;
-use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+use Illuminate\Http\Request;
+use App\Store;
+use Auth;
+
+class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
-        $categories = Categories::orderBy('id','desc')->paginate(5);
-        return view('admin.coupon.categories.index',compact('categories'));
+        $stores = Store::orderBy('id','desc')->paginate(5);
+        return view('admin.coupon.store.index',compact('stores'));
     }
 
     /**
@@ -31,7 +26,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+     //
     }
 
     /**
@@ -46,10 +41,25 @@ class CategoriesController extends Controller
             'name' => 'required',
             'slug' => 'required',
             'description' => 'required',
+            'home_url'=>'required',
+            'image'=>'required|image|mimes:jpg,jpeg,png,gif'
         ]);
-        $categories = $request->all();
-        $categories['user_id'] = Auth::id();
-        Categories::create($categories);
+
+        if ($request->file('image')){
+            $image = $request->file('image');
+            $new_name = time().'.'.$image-> getClientOriginalExtension();
+            $image->move(public_path("image"), $new_name);
+        }
+        Store::create(
+            [
+                'name'=> request()->get('name'),
+                'slug'=> request()->get('slug'),
+                'description' => request()->get('description'),
+                'home_url' => request()->get('home_url'),
+                'image'=>$new_name,
+                'user_id'=>Auth::id(),
+            ]
+        );
 
         return back();
     }
@@ -85,9 +95,7 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Categories::findOrFail($request->id);
-        $update->update($request->all());
-        return back();
+        //
     }
 
     /**
@@ -98,8 +106,6 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $categories=Categories::find($id);
-        $categories->delete($id);
-        return back();
+        //
     }
 }

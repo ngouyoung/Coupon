@@ -19,8 +19,18 @@ Auth::routes();
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::get('/', 'AdminController@index');
-    Route::get('/categories','CategoriesController@index');
-    Route::resource('categories', 'CategoriesController');
+    Route::prefix('categories')->middleware('auth')->group(function () {
+        Route::get('/', 'CategoriesController@index');
+        Route::post('/', 'CategoriesController@store');
+        Route::get('view/{id}', 'CategoriesController@show');
+        Route::get('delete/{id}', 'CategoriesController@destroy');
+        Route::get('edit/{id}', 'CategoriesController@update');
+    });
+
+    Route::prefix('store')->middleware('auth')->group(function () {
+        Route::get('/','StoreController@index');
+        Route::post('/','StoreController@store');
+    });
 });
 
 

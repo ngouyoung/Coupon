@@ -19,7 +19,7 @@
             <a class="dropdown-item" href="#">All Coupon</a>
             <a class="dropdown-item" href="#">Add New</a>
             <a class="dropdown-item" href="{{ url('admin/categories') }}">Categories</a>
-            <a class="dropdown-item" href="#">Stores</a>
+            <a class="dropdown-item" href="{{ url('admin/store') }}">Stores</a>
         </div>
     </li>
     <li class="nav-item">

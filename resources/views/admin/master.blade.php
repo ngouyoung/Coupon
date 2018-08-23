@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Dashboard</title>
+    <title>@yield('title','Conpons')</title>
 
     <!-- Bootstrap core CSS-->
     <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -29,7 +29,7 @@
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-    <a class="navbar-brand mr-1" href="#"><img src="{{ asset('image/logo.png') }}" alt=""></a>
+    <a class="navbar-brand mr-1" href="{{ url('/home') }}"><img src="{{ asset('image/logo.png') }}" alt=""></a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
@@ -101,6 +101,7 @@
             <!--End Breadcrumbs-->
             <!--Content-->
             @yield('content')
+
             <!--End Content-->
 
         </div>
@@ -155,7 +156,7 @@
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
 <!-- Page level plugin JavaScript-->
-<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+{{--<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>--}}
 <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}"></script>
 
@@ -164,7 +165,7 @@
 
 <!-- Demo scripts for this page-->
 <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-<script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
+{{--<script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>--}}
 
 </body>
 
